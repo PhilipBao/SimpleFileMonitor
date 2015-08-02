@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="diretoryList">
+        <item name="Pic">Picture</item>
+
+        <item name="Mus">Music</item>
+
+        <item name="Doc">Important document</item>
+
+        <item name="Dow">Download file</item>
+
+
+    </string-array>
+    <string-array name="diretoryListValues">
+
+        <item name="Pic">Pictures</item>
+        <item name="Doc">Documents</item>
+        <item name="Dow">Download</item>
+        <item name="Mus">Musics</item>
+
+    </string-array>
+
+
+
+
+
+    <string-array name="actionTypeList">
+        <item name="Acc">ACCESS</item>
+
+        <item name="Mod">MODIFY</item>
+
+        <item name="Att">ATTRIB</item>
+
+        <item name="Close_write">CLOSE_WRITE</item>
+
+        <item name="Close_no_write">CLOSE_NOWRITE</item>
+
+        <item name="Open">OPEN</item>
+
+        <item name="Moved_from">MOVED_FROM</item>
+
+        <item name="Moved_to">MOVED_TO</item>
+
+        <item name="Cre">CREATE</item>
+
+        <item name="Delete">DELETE</item>
+
+        <item name="Delete_self">DELETE_SELF</item>
+
+        <item name="Move_self">MOVE_SELF</item>
+
+        <item name="All">All of above</item>
+
+    </string-array>
+
+    <string-array name="actionTypeListValues">
+
+        <item name="Acc">1</item>
+        <item name="Mod">2</item>
+        <item name="Att">4</item>
+        <item name="Close_write">8</item>
+        <item name="Close_no_write">10</item>
+        <item name="Open">20</item>
+        <item name="Moved_from">40</item>
+        <item name="Moved_to">80</item>
+        <item name="Cre">100</item>
+        <item name="Delete">200</item>
+        <item name="Delete_self">400</item>
+        <item name="Move_self">800</item>
+        <item name="All">0</item>
+
+    </string-array>
+
+
+
+
+</resources>

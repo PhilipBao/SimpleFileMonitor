@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_user_profile" >
+        <EditTextPreference
+            android:title="@string/pref_user_name"
+            android:summary="@string/pref_user_name_summary"
+            android:key="prefUsername"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_update_setting" >
+
+        <!-- file diectory path minitoring-->
+        <ListPreference
+            android:key="monitoring_diretory"
+            android:entries="@array/diretoryList"
+            android:entryValues="@array/diretoryListValues"
+            android:title="@string/SetDirectory"
+            android:defaultValue="Pictures"/>/>
+
+        <!-- Type of file action monitoring-->
+        <ListPreference
+            android:key="monitoring_type"
+            android:entries="@array/actionTypeList"
+            android:entryValues="@array/actionTypeListValues"
+            android:title="@string/SetType"
+            android:defaultValue="99"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

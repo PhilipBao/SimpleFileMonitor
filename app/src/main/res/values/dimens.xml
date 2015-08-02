@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="normal_text_size">12sp</dimen>
+
+    <dimen name="edge_padding">16dp</dimen>
+    <dimen name="activity_vertical_margin">0dp</dimen>
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="button_padding">5dp</dimen>
+</resources>

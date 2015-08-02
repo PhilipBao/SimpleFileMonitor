@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SimpleFileMonitor</string>
+    <string name="settingactivity">settingactivity</string>
+
+    <string name="Logging">Nothing to be shown</string>
+    <string name="Start">Start</string>
+    <string name="Stop">Stop</string>
+    <string name="listListener">List Current Listener</string>
+
+    <string name="listener_settings">Listener Settings</string>
+    <string name="pref_user_profile">Username</string>
+    <string name="pref_user_name">User name</string>
+    <string name="pref_user_name_summary">Summary</string>
+    <string name="pref_update_setting">Functionality setting</string>
+    <string name="SetDirectory">Directory Setting</string>
+    <string name="SetType">Action Type</string>
+
+    <string name="background_text">File Monitor</string>
+</resources>
