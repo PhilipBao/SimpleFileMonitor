@@ -27,8 +27,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="visible">
+        android:layout_centerVertical="true">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -65,8 +64,8 @@
         android:layout_toStartOf="@id/stop"/>
 
     <Button
-        android:id="@+id/listListener"
-        android:text="@string/listListener"
+        android:id="@+id/clear"
+        android:text="@string/clearLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

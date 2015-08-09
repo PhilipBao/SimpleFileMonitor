@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.philip.myapplication.UI.LogListItem;
@@ -51,9 +52,11 @@ public class MainActivity extends ActionBarActivity implements SysLog.ILogObserv
 
         SysLog.getInstance().registerObserver(this);
 
+        setContentView(R.layout.activity_main);
+
         mBackgroundLayout = (ViewGroup) findViewById(R.id.background_layout);
 
-        setContentView(R.layout.activity_main);
+
 
         mPrefSet = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -80,13 +83,13 @@ public class MainActivity extends ActionBarActivity implements SysLog.ILogObserv
 
 
         int buttonWidth = getWindow().getAttributes().width / NUMBER_OF_BUTTONS;
-        Button startButton = (Button)this.findViewById(R.id.start);
+        final Button startButton = (Button)this.findViewById(R.id.start);
         Button stopButton = (Button)this.findViewById(R.id.stop);
-        Button listListener = (Button)this.findViewById(R.id.listListener);
+        Button clearButton = (Button)this.findViewById(R.id.clear);
 
         startButton.setWidth(buttonWidth);
         stopButton.setWidth(buttonWidth);
-        listListener.setWidth(buttonWidth);
+        clearButton.setWidth(buttonWidth);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +97,7 @@ public class MainActivity extends ActionBarActivity implements SysLog.ILogObserv
                 try {
                     mObserver.startWatching();
                 } catch (Exception e) {
-                    Log.e(TAG, e.toString());
+                    Toast.makeText(getApplicationContext(), getResources().getText(R.string.already_start), Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -106,11 +109,10 @@ public class MainActivity extends ActionBarActivity implements SysLog.ILogObserv
             }
         });
 
-        listListener.setOnClickListener(new View.OnClickListener() {
+        clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "list current listener");
-                //showUserSettings();
+                SysLog.getInstance().clearLog();
             }
         });
 
@@ -153,33 +155,24 @@ public class MainActivity extends ActionBarActivity implements SysLog.ILogObserv
                 startActivity(setIntent);
                 return true;
             }
-
             default:
                 return super.onOptionsItemSelected(item);
-
         }
-
-
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case RESULT_SETTING:
-
                 break;
-
         }
-
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mObserver.stopWatching();
-
     }
 
     @Override
@@ -196,9 +189,7 @@ public class MainActivity extends ActionBarActivity implements SysLog.ILogObserv
             public void run() {
                 Log.d(TAG, "sizeqweewq: " + Integer.toString(log.size()));
                 if (log.size() > 0) {
-                    if (mBackgroundLayout != null) {
-                        mBackgroundLayout.setVisibility(View.GONE);
-                    }
+                    mBackgroundLayout.setVisibility(View.GONE);
                     if (mListView != null) {
                         mListView.setVisibility(View.VISIBLE);
                         try {
@@ -207,21 +198,21 @@ public class MainActivity extends ActionBarActivity implements SysLog.ILogObserv
                             Log.e(TAG, e.toString());
                         }
                         for (LogListItem item : mRenderList) {
-                            mArrayAdapter.insert(item, mArrayAdapter.getCount());
+                            if(mArrayAdapter.getCount() >= SysLog.getInstance().MAX_ENTRY) {
+                                mArrayAdapter.clear();
+                            }
+                            mArrayAdapter.add(item);
                             mArrayAdapter.notifyDataSetChanged();
                         }
-
-                    }
-                } else {
-
-                    if (mBackgroundLayout != null) {
-                        mBackgroundLayout.setVisibility(View.VISIBLE);
-                    }
-
-                    if (mListView != null) {
-                        mListView.setVisibility(View.GONE);
                         mArrayAdapter.notifyDataSetChanged();
                     }
+                } else {
+                    if (mListView != null) {
+                        mArrayAdapter.clear();
+                        mArrayAdapter.notifyDataSetChanged();
+                        mListView.setVisibility(View.GONE);
+                    }
+                    mBackgroundLayout.setVisibility(View.VISIBLE);
                 }
             }
         });

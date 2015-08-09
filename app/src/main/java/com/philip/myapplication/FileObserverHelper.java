@@ -1,6 +1,5 @@
 package com.philip.myapplication;
 
-import android.content.Context;
 import android.os.FileObserver;
 import android.util.Log;
 
@@ -17,12 +16,11 @@ public class FileObserverHelper extends FileObserver {
     private int mMask;
     private final String PATH;
     private String mEventHappen = null;
-
+    private static String currentAction = "";
 
     public FileObserverHelper(String path) {
         this(path, ALL_EVENTS);
     }
-
 
     public FileObserverHelper(String path, int mask) {
         super(path, mask);
@@ -32,8 +30,6 @@ public class FileObserverHelper extends FileObserver {
 
     @Override
     public void onEvent(int event, final String specPath) {
-
-
         switch (event) {
             case ACCESS:
                 mEventHappen = "ACCESS";
@@ -76,16 +72,17 @@ public class FileObserverHelper extends FileObserver {
                 break;
         }
 
-        if(specPath != null && !"unknown".equals(mEventHappen)) {
-            SysLog.getInstance().addLog(new LogListItem(PATH + FILE_SEPERATER + specPath, "Attempt to " + mEventHappen));
+        if(specPath != null && !"unknown".equalsIgnoreCase(mEventHappen)) {
+            //Simple filter for duplicate event
+            if(!currentAction.equalsIgnoreCase(mEventHappen)) {
+                SysLog.getInstance().addLog(new LogListItem(PATH + FILE_SEPERATER + specPath, "Attempt to " + mEventHappen));
+                currentAction = mEventHappen;
+            }
             Log.d(TAG, "File path: " + specPath + " , by Event: " + mEventHappen);
         } else {
             Log.d(TAG, "File path: null , by Event: " + mEventHappen);
         }
-
-
     }
-
     public String getPath () {
         return PATH;
     }

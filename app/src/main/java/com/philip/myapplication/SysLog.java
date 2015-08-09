@@ -3,6 +3,7 @@ package com.philip.myapplication;
 
 import android.content.Context;
 import android.database.Observable;
+import android.util.Log;
 
 import com.philip.myapplication.UI.LogListItem;
 
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 
 public class SysLog extends Observable<SysLog.ILogObserver> {
     private static final String TAG = SysLog.class.getSimpleName();
-
-    private ArrayList <LogListItem> mLog = new ArrayList <LogListItem> ();
+    public static final int MAX_ENTRY = 10;
+    private ArrayList <LogListItem> mLog = new ArrayList <LogListItem> (11);
 
 
     private SysLog() {}
@@ -31,6 +32,10 @@ public class SysLog extends Observable<SysLog.ILogObserver> {
 
     public synchronized void addLog(LogListItem item) {
         if (item != null) {
+            if (mLog.size() >= MAX_ENTRY) {
+                //Log.d(TAG, Integer.toString(mLog.size()));
+                mLog.remove(0);
+            }
             mLog.add(item);
             logChanged(getLog());
         }
